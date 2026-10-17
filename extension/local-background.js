@@ -79,8 +79,8 @@ async function dispatch(request, sender) {
     try {
       await local("/health");
       return { online: true, automatic, account };
-    } catch {
-      return { online: false, automatic, account };
+    } catch (error) {
+      return { online: false, automatic, account, error: error.message };
     }
   }
   if (request.action === "settings") {

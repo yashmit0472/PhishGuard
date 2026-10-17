@@ -27,7 +27,7 @@ send("status")
     status.textContent =
       (r.online
         ? "✓ Local app is running."
-        : "! Protection is off — start PhishGuard.") +
+        : "! " + (r.error || "Protection is off — start PhishGuard.")) +
       (r.account ? " Gmail: " + r.account : " Gmail is not connected.");
   })
   .catch((e) => (status.textContent = e.message));

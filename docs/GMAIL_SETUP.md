@@ -4,6 +4,23 @@ The local app requires no API key. Gmail requires a public Chrome-extension OAut
 client ID. Never paste passwords, access tokens, client secrets or pairing codes into
 chat, source control or logs. An API key cannot replace OAuth mailbox consent.
 
+## Configured development client
+
+The source extension now uses the public OAuth client ID
+`80323094502-7qgnkui7osk06dbtmp1l7ps9j8ilft7l.apps.googleusercontent.com`.
+The account owner supplied extension ID `pdkjgddobebepkfbejdmdpmiggcjgmgp`.
+Confirm that this is both the ID displayed in `chrome://extensions` and the Item ID
+of the Chrome Extension OAuth client in Google Cloud. This binding has not been
+verified against Google Cloud or a live sign-in.
+
+For this configured checkout, reload the existing extension from the same folder,
+refresh Gmail, then follow steps 7–8 below. Gmail API must be enabled and the account
+must be an allowed test user if the consent app is in Testing. Loading a different
+copy of the extension can change its ID; the OAuth client ID does not set the
+extension ID. Do not replace the installed folder with a packaged copy for this test.
+
+## Setup steps
+
 1. Create a project in https://console.cloud.google.com/ and enable **Gmail API**.
 2. Under **Google Auth Platform**, set app name/contact details. For a demo choose
    External / Testing and add each demo account as a test user.

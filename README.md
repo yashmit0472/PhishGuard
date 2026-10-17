@@ -89,8 +89,12 @@ enable Gmail API, configure test-user consent, and create a **Chrome Extension O
 client** tied to the extension ID. The only values the developer needs are the public
 OAuth client ID and extension ID. Never share passwords, client secrets or access tokens.
 
-Follow [Gmail setup](docs/GMAIL_SETUP.md). The manifest intentionally contains a client-ID
-placeholder until this is done. `gmail.readonly` grants mailbox-wide read permission;
+The supplied public OAuth client ID is now configured in `extension/manifest.json`,
+for the supplied development extension ID `pdkjgddobebepkfbejdmdpmiggcjgmgp`.
+Reload the existing extension, refresh Gmail, pair the local app and choose
+**Connect Gmail**. Confirm the Google Cloud client's Item ID matches the installed
+extension ID; live authorization has not yet been tested. Follow [Gmail setup](docs/GMAIL_SETUP.md).
+`gmail.readonly` grants mailbox-wide read permission;
 requesting only an open message does not narrow Google's actual consent scope.
 
 **Live Gmail integration is not yet verified.** Gmail's web UI does not expose a

@@ -278,7 +278,7 @@
         if (!current()) return;
         if (!s.online)
           live.textContent =
-            "! Protection is off — start the PhishGuard local app.";
+            "! " + (s.error || "Protection is off — start the PhishGuard local app.");
         else if (s.automatic) scan(true);
         else
           live.textContent =
@@ -356,7 +356,7 @@
     sync();
     fallbackStatus.textContent = panels.size
       ? "Use Check this email in the panel above the message you want to check."
-      : "! Analysis unavailable — this exact message cannot be identified. Use EML upload in the local app.";
+      : "Open an email and expand its message, then try again. If no PhishGuard panel appears above the message, use EML upload in the local app.";
   };
   setup.onclick = () => send("settings");
   fallbackBox.append(fallbackStatus, manual, setup);
@@ -368,7 +368,7 @@
         .then((s) => {
           fallbackStatus.textContent = s.online
             ? "✓ Local app is running. Open a message to check it."
-            : "! Protection is off — start the PhishGuard local app.";
+            : "! " + (s.error || "Protection is off — start the PhishGuard local app.");
           if (!s.online) for (const p of panels.values()) p.offline();
         })
         .catch(() => {}),
