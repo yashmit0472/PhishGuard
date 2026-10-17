@@ -1,0 +1,28 @@
+{
+  "host": "Windows development machine",
+  "clean_machine": false,
+  "passed": [
+    "packaged startup",
+    "bundled frontend and CSP",
+    "unauthenticated history rejection",
+    "disguised APK filename",
+    "static PE signature mismatch",
+    "graceful shutdown",
+    "restart",
+    "SQLite cached result survives restart"
+  ],
+  "not_tested": [
+    "Windows login cycle",
+    "clean machine",
+    "Google OAuth",
+    "NVDA",
+    "final rebuilt binary runtime",
+    "missing frontend assets in final package"
+  ],
+  "scope": "Earlier build only; final rebuilt executable not validated",
+  "final_build": {
+    "status": "blocked",
+    "error": "WinError 4551: An Application Control policy has blocked this file",
+    "security_bypass_attempted": false
+  }
+}

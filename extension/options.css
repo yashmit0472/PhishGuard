@@ -1,0 +1,51 @@
+body {
+  font: 16px/1.6 system-ui;
+  color: #172d36;
+  background: #f3f6f5;
+  margin: 20px;
+  min-width: 300px;
+  max-width: 650px;
+}
+button,
+input {
+  font: inherit;
+  min-height: 44px;
+  margin: 8px 4px;
+  padding: 8px;
+  border: 1px solid #526d72;
+  border-radius: 6px;
+  background: white;
+  color: #172d36;
+}
+button {
+  cursor: pointer;
+}
+a {
+  color: #14594c;
+}
+input[type="checkbox"] {
+  width: 22px;
+  vertical-align: middle;
+}
+label {
+  display: block;
+}
+h2 {
+  font-size: 20px;
+}
+:focus-visible {
+  outline: 3px solid #833900;
+  outline-offset: 3px;
+}
+@media (forced-colors: active) {
+  button,
+  input {
+    border: 1px solid ButtonText;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

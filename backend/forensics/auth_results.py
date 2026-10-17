@@ -1,40 +1,6 @@
-"""
-auth_results.py
-
-Evaluates SPF, DKIM, and DMARC for an email using a two-tier approach:
-
-TIER 1 — Header-based (preferred, when available):
-    Modern mail servers stamp their own verdict into the
-    "Authentication-Results" header (or legacy "Received-SPF") at the
-    moment of delivery. This is the ground-truth check performed by a
-    real mail server with full context — we trust it when present.
-
-TIER 2 — Live DNS fallback (when headers are missing):
-    Older emails, or emails from before SPF/DKIM/DMARC existed/were
-    widely adopted, won't have these headers at all. In that case we
-    perform our OWN best-effort live evaluation:
-      - SPF: fetch the domain's SPF TXT record, parse its mechanisms
-        (ip4/ip6/a/mx/include/all), and check if the originating IP is
-        actually authorized. This is a REAL check against REAL DNS data,
-        simplified to one level of `include` recursion (full RFC 7208
-        supports unlimited recursion + macros, out of scope here, but
-        this covers the overwhelming majority of real-world records).
-      - DKIM: full cryptographic signature verification requires the
-        exact raw message bytes, which most pipelines don't retain. So
-        this does a best-effort check instead: confirms the DKIM
-        signing domain (`d=`) actually has a public key published at
-        `<selector>._domainkey.<domain>`, and checks alignment between
-        the signing domain and the From: domain. This does NOT verify
-        the cryptographic signature itself — that's noted explicitly in
-        the output so nobody mistakes it for full verification.
-      - DMARC: fetch and parse the domain's real DMARC policy record
-        and evaluate SPF/DKIM alignment against it.
-
-IMPORTANT: DNS lookups require network access. If a lookup fails (no
-network, domain doesn't exist anymore, timeout), this module degrades
-gracefully — returns "lookup_failed"-style verdicts rather than crashing
-the whole pipeline. A single email failing DNS should never take down a batch.
-"""
+"""Legacy authentication helpers. The public evaluate_authentication entry point
+returns unverified header claims without DNS. Historical explicit live helpers
+are retained for reference and are not used by the local application."""
 
 import re
 import ipaddress
@@ -274,49 +240,9 @@ def evaluate_dmarc_live(domain: Optional[str]) -> Dict:
 # ============================================================
 
 def evaluate_authentication(all_headers: dict, from_domain: Optional[str], originating_ip: Optional[str]) -> Dict:
-    """
-    Main entry point. Tries header-based verdicts first (fast, no
-    network, reflects the ACTUAL check the receiving server did at
-    delivery time). Falls back to live DNS evaluation for anything the
-    headers didn't cover.
-    """
-    header_results = parse_authentication_results(all_headers)
-    received_spf_fallback = parse_received_spf_header(all_headers)
-
-    result = {
-        "spf": {"verdict": None, "source": None, "details": None},
-        "dkim": {"verdict": None, "source": None, "details": None},
-        "dmarc": {"verdict": None, "source": None, "details": None},
-    }
-
-    if header_results["spf"]:
-        result["spf"]["verdict"] = header_results["spf"]
-        result["spf"]["source"] = "header_reported"
-    elif received_spf_fallback:
-        result["spf"]["verdict"] = received_spf_fallback
-        result["spf"]["source"] = "header_reported"
-    else:
-        live = evaluate_spf_live(from_domain, originating_ip)
-        result["spf"]["verdict"] = live["verdict"]
-        result["spf"]["source"] = "live_dns_check"
-        result["spf"]["details"] = live
-
-    if header_results["dkim"]:
-        result["dkim"]["verdict"] = header_results["dkim"]
-        result["dkim"]["source"] = "header_reported"
-    else:
-        live = evaluate_dkim_live(all_headers, from_domain)
-        result["dkim"]["verdict"] = live["verdict"]
-        result["dkim"]["source"] = "live_dns_check"
-        result["dkim"]["details"] = live
-
-    if header_results["dmarc"]:
-        result["dmarc"]["verdict"] = header_results["dmarc"]
-        result["dmarc"]["source"] = "header_reported"
-    else:
-        live = evaluate_dmarc_live(from_domain)
-        result["dmarc"]["verdict"] = live["verdict"]
-        result["dmarc"]["source"] = "live_dns_check"
-        result["dmarc"]["details"] = live
-
-    return result
+    """No implicit DNS calls or trust in imported Authentication-Results headers."""
+    claimed = parse_authentication_results(all_headers)
+    return {name: {"verdict": "unknown", "source": "unverified_header_claim",
+                   "claimed_result": claimed[name],
+                   "details": {"explanation": "No independently validated receiving boundary. DNS was not queried."}}
+            for name in ("spf", "dkim", "dmarc")}

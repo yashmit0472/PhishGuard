@@ -1,0 +1,32 @@
+{"language": "en", "label": 0, "group": "planning", "text": "Our team meeting is on Monday at ten."}
+{"language": "en", "label": 0, "group": "lunch", "text": "Lunch is ready in the office kitchen."}
+{"language": "en", "label": 0, "group": "family", "text": "Happy birthday! We will visit this weekend."}
+{"language": "en", "label": 0, "group": "receipt", "text": "Your order receipt is attached for your records."}
+{"language": "en", "label": 0, "group": "newsletter", "text": "This month we planted trees in our neighbourhood."}
+{"language": "en", "label": 0, "group": "calendar", "text": "The library closes at six on Saturday."}
+{"language": "en", "label": 0, "group": "school", "text": "Please bring your notebook to class tomorrow."}
+{"language": "en", "label": 0, "group": "travel", "text": "The train timetable is on the station noticeboard."}
+{"language": "en", "label": 1, "group": "credential", "text": "Urgent: share your password to restore your mailbox."}
+{"language": "en", "label": 1, "group": "lottery", "text": "You won a lottery! Pay a processing fee to receive your prize."}
+{"language": "en", "label": 1, "group": "job", "text": "Guaranteed job offer. Send a registration deposit today."}
+{"language": "en", "label": 1, "group": "remote", "text": "Install AnyDesk now so we can fix your bank account."}
+{"language": "en", "label": 1, "group": "otp", "text": "Send your OTP immediately or your account will be suspended."}
+{"language": "en", "label": 1, "group": "parcel", "text": "Pay a delivery fee at this new link or lose your parcel."}
+{"language": "en", "label": 1, "group": "investment", "text": "Guaranteed double profit today. Transfer your savings now."}
+{"language": "en", "label": 1, "group": "impersonation", "text": "I am your manager. Buy gift cards and send the codes urgently."}
+{"language": "hi", "label": 0, "group": "planning", "text": "हमारी बैठक सोमवार को दस बजे होगी।"}
+{"language": "hi", "label": 0, "group": "lunch", "text": "कार्यालय की रसोई में खाना तैयार है।"}
+{"language": "hi", "label": 0, "group": "family", "text": "जन्मदिन मुबारक। हम शनिवार को मिलने आएँगे।"}
+{"language": "hi", "label": 0, "group": "school", "text": "कल कक्षा में अपनी किताब लाना।"}
+{"language": "hi", "label": 1, "group": "credential", "text": "खाता चालू रखने के लिए तुरंत अपना पासवर्ड भेजें।"}
+{"language": "hi", "label": 1, "group": "lottery", "text": "आप लॉटरी जीत गए हैं। इनाम पाने के लिए पहले पैसे जमा करें।"}
+{"language": "hi", "label": 1, "group": "job", "text": "पक्की नौकरी के लिए अभी फीस जमा करें।"}
+{"language": "hi", "label": 1, "group": "otp", "text": "अभी ओटीपी बताएं वरना खाता बंद हो जाएगा।"}
+{"language": "hinglish", "label": 0, "group": "planning", "text": "Hamari meeting somvar ko das baje hai."}
+{"language": "hinglish", "label": 0, "group": "lunch", "text": "Office ki kitchen mein khana taiyar hai."}
+{"language": "hinglish", "label": 0, "group": "family", "text": "Janamdin mubarak! Hum shanivar ko milne aayenge."}
+{"language": "hinglish", "label": 0, "group": "school", "text": "Kal class mein apni kitab lana."}
+{"language": "hinglish", "label": 1, "group": "credential", "text": "Account chalu rakhne ke liye turant password bhejo."}
+{"language": "hinglish", "label": 1, "group": "lottery", "text": "Aap lottery jeet gaye. Prize ke liye pehle fee pay karo."}
+{"language": "hinglish", "label": 1, "group": "job", "text": "Guaranteed job ke liye abhi registration deposit bhejo."}
+{"language": "hinglish", "label": 1, "group": "otp", "text": "Jaldi OTP batao warna account band ho jayega."}

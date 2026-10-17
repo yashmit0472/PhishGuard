@@ -158,24 +158,8 @@ def _run_parsed_pipeline(parsed_email) -> dict:
     triage_safe_threshold = float(os.getenv("TRIAGE_SAFE_THRESHOLD", "0.90"))
     gemini_skipped = False
 
-    # Hackathon Fix: XGBoost only looks at metadata (headers, domains). 
-    # If a scammer uses a clean Gmail account but puts a scam link in the body, 
-    # XGBoost might falsely score it 99% safe and bypass Gemini.
-    # We add a heuristic override to FORCE Gemini if risky keywords or links exist.
-    force_gemini = False
-    body_text = email_summary.get("body_text", "")
-    print(f"\n[DEBUG Heuristic] Extracted Body Length: {len(body_text) if body_text else 0}")
-    if body_text:
-        body_lower = body_text.lower()
-        risky_keywords = ["urgent", "won", "$", "prize", "password", "gift card", "tinyurl.com", "bit.ly", "login"]
-        matched_words = [k for k in risky_keywords if k in body_lower]
-        print(f"[DEBUG Heuristic] Matched risky words: {matched_words}")
-        if matched_words:
-            force_gemini = True
-            
-    if ioc_analysis.get("urls"):
-        print(f"[DEBUG Heuristic] URLs found: {ioc_analysis.get('urls')}")
-        force_gemini = True
+    # Classifier predictions never bypass forensic/content checks.
+    force_gemini = True
 
     if (
         not force_gemini

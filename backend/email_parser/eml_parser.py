@@ -112,10 +112,9 @@ def parse_eml_bytes(raw_bytes: bytes) -> ParsedEmail:
         except Exception as e:
             warnings.append(f"Failed to decode single-part body: {e}")
 
-    # ---- Apply PII Masking before returning ----
-    result.subject = redact_sensitive_data(result.subject)
-    result.body_text = redact_sensitive_data("\n".join(body_text_parts)) if body_text_parts else None
-    result.body_html = redact_sensitive_data("\n".join(body_html_parts)) if body_html_parts else None
+    # Preserve evidence. Redact only after indicator extraction, at the display boundary.
+    result.body_text = "\n".join(body_text_parts) if body_text_parts else None
+    result.body_html = "\n".join(body_html_parts) if body_html_parts else None
     result.attachments = attachments
     result.parse_warnings = warnings
 

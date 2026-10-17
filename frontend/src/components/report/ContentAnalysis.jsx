@@ -214,19 +214,9 @@ export function ContentAnalysis({ aiAnalysis = {}, email = {} }) {
             the sandbox by allowing the framed document to escape and execute code 
             directly in the parent origin context.
           */}
-          <iframe
-            title="Sandboxed Email HTML Preview"
-            sandbox="allow-same-origin"
-            srcDoc={email.body_html}
-            style={{
-              width: '100%',
-              height: '380px',
-              border: '1px solid var(--border-hairline)',
-              borderRadius: '0 0 var(--radius-xs) var(--radius-xs)',
-              backgroundColor: '#FFFFFF',
-              display: 'block',
-            }}
-          />
+          <pre aria-label="Email HTML source (not rendered)" style={{ whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}>
+            {email.body_html}
+          </pre>
         </div>
       )}
     </div>

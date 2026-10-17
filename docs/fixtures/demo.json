@@ -1,0 +1,14 @@
+[
+ {"id":"mail-password","label":"phishing","language":"en","input_type":"email","filename":"password.eml","content":"From: Helpdesk <help@account-check.example>\nReply-To: support@reply.example\nSubject: Urgent: mailbox expires\nAuthentication-Results: mx.google.com; spf=pass; dkim=pass; dmarc=pass\nContent-Type: text/plain; charset=utf-8\n\nEnter your password immediately to keep access at https://account-check.example/verify","expected":"Suspicious"},
+ {"id":"mail-benign","label":"benign","language":"en","input_type":"email","filename":"meeting.eml","content":"From: Priya <priya@example.com>\nSubject: Team lunch\nContent-Type: text/plain; charset=utf-8\n\nOur team lunch is at noon tomorrow. See you there.","expected":"Inconclusive"},
+ {"id":"hindi-prize","label":"scam","language":"hi","input_type":"message","content":"आपने लॉटरी जीती है। तुरंत ₹500 जमा करें और ओटीपी भेजें।","expected":"Dangerous"},
+ {"id":"hinglish-otp","label":"scam","language":"hinglish","input_type":"message","content":"Aapka account band ho jayega. Jaldi OTP bhejo aur password batao.","expected":"Suspicious"},
+ {"id":"upi-job","label":"scam","language":"en","input_type":"message","content":"Guaranteed job! Pay a registration fee of INR 2000 to hiring@upi immediately. Call +919876543210.","expected":"Suspicious"},
+ {"id":"benign-hindi","label":"benign","language":"hi","input_type":"message","content":"कल दोपहर को खाना खाने आना। परिवार से मिलेंगे।","expected":"Inconclusive"},
+ {"id":"benign-hinglish","label":"benign","language":"hinglish","input_type":"message","content":"Kal lunch ke liye milte hain. Main ghar se khana launga.","expected":"Inconclusive"},
+ {"id":"apk-disguise","label":"dangerous_filename","language":"en","input_type":"filename","filename":"Wedding Invitation.pdf.apk","expected":"Dangerous"},
+ {"id":"pdf-name","label":"unknown_file","language":"en","input_type":"filename","filename":"notes.pdf","expected":"Inconclusive"},
+ {"id":"link-userinfo","label":"deceptive_link","language":"en","input_type":"link","content":"https://bank.example@attacker.example/login?token=private-token","expected":"Suspicious"},
+ {"id":"empty","label":"invalid","language":"en","input_type":"message","content":"","expected":"Analysis unavailable"},
+ {"id":"qr-lure","label":"scam","language":"en","input_type":"message","content":"Urgent: install AnyDesk to unlock your bank account.","expected":"Suspicious"}
+]

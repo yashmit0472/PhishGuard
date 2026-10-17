@@ -1,0 +1,87 @@
+{
+  "dataset_sha256": "b7455cdd41e6d4548975539f809463ea173167eeaa973ec5db524a568254661e",
+  "seed": 42,
+  "train_samples": 21,
+  "test_samples": 11,
+  "deduplicated_samples": 32,
+  "evaluation_only": true,
+  "overall": {
+    "samples": 11,
+    "precision": 0.875,
+    "recall": 1.0,
+    "f1": 0.9333333333333333,
+    "confusion_matrix_tn_fp_fn_tp": [
+      [
+        3,
+        1
+      ],
+      [
+        0,
+        7
+      ]
+    ],
+    "false_positive_ids": [
+      6
+    ],
+    "false_negative_ids": []
+  },
+  "languages": {
+    "en": {
+      "samples": 5,
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1": 0.8571428571428571,
+      "confusion_matrix_tn_fp_fn_tp": [
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "false_positive_ids": [
+        6
+      ],
+      "false_negative_ids": []
+    },
+    "hi": {
+      "samples": 3,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "confusion_matrix_tn_fp_fn_tp": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "false_positive_ids": [],
+      "false_negative_ids": []
+    },
+    "hinglish": {
+      "samples": 3,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "confusion_matrix_tn_fp_fn_tp": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "false_positive_ids": [],
+      "false_negative_ids": []
+    }
+  },
+  "limitations": "Small authored fixtures are smoke tests only, not general accuracy evidence. Campaign groups are disjoint. Review source grouping, near duplicates and a separate representative holdout before deployment."
+}

@@ -1,22 +1,6 @@
-"""
-received_chain.py
-
-Parses the Received: header chain to extract IP addresses and determine
-the most likely ORIGINATING IP — i.e. the sender's actual public IP,
-as opposed to internal relay hops or the recipient's own mail servers.
-
-Why this is tricky: Received headers are PREPENDED by each mail server
-as a message is relayed. That means:
-  - all_headers["Received"][0]  = the MOST RECENT hop (closest to final
-    delivery — often your own infrastructure, e.g. Postfix/fetchmail)
-  - all_headers["Received"][-1] = the OLDEST hop (closest to the original
-    sender)
-
-So we walk the chain starting from the OLDEST hop and return the first
-PUBLIC (non-private, non-loopback) IP we find — that's the point where
-the message first touched the public internet, which is the strongest
-signal of where it actually originated.
-"""
+"""Received headers are preserved in original order as unverified relay claims.
+No sender-device IP is inferred. The local engine requires an independently
+validated receiving boundary before trusting an observation."""
 
 import ipaddress
 import re
@@ -86,22 +70,11 @@ def parse_received_chain(all_headers: dict) -> List[Dict]:
 
 
 def find_originating_ip(all_headers: dict) -> Optional[str]:
+    """Compatibility field: no device IP can be inferred from uploaded headers.
+
+    A trusted receiving boundary must be established independently. The local
+    engine preserves ordered relay claims and never treats them as device identity.
     """
-    Returns the best guess at the sender's true originating public IP.
-
-    Strategy: walk the Received chain from OLDEST hop to NEWEST (i.e.
-    reverse of header order, since header[0] = newest). Return the first
-    public IP encountered — this is the point where the message first
-    became visible on the public internet, before it passed through any
-    of the recipient's own internal/trusted relay infrastructure.
-    """
-    hops = parse_received_chain(all_headers)
-
-    # walk from oldest (last in the list) to newest (first in the list)
-    for hop in reversed(hops):
-        if hop["public_ips"]:
-            return hop["public_ips"][0]
-
     return None
 
 
@@ -112,4 +85,4 @@ def get_received_chain_summary(all_headers: dict) -> List[str]:
     field shape from the original Stage B plan (list of hop strings).
     """
     received_headers = all_headers.get("Received", [])
-    return list(reversed(received_headers))  # oldest first, matches human-readable investigation order
+    return list(received_headers)  # Preserve original newest-first order.

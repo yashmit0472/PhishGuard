@@ -14,6 +14,15 @@ backend/ai_engine/data/archive/
 backend/ai_engine/data/archive(1)/
 __pycache__/
 *.pyc
+.venv/
+node_modules/
+frontend/dist/
+build/
+dist/
+.local-test/
+*.sqlite3
+*.sqlite3-*
+*.spec
 
 # Local secrets -- each developer's own Gemini API key lives here, never commit
 .env

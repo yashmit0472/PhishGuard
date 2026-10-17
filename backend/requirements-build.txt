@@ -1,0 +1,3 @@
+# Developer build/evaluation dependencies only. The core runtime uses Python stdlib.
+pyinstaller==6.22.3
+scikit-learn==1.9.1

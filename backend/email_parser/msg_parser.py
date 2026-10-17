@@ -44,7 +44,7 @@ def parse_msg(file_path: str) -> ParsedEmail:
 
     try:
         # ---- core headers ----
-        result.subject = redact_sensitive_data(msg.subject)
+        result.subject = msg.subject
         result.from_raw = msg.sender
         result.to = msg.to
         result.date = str(msg.date) if msg.date else None
@@ -74,9 +74,9 @@ def parse_msg(file_path: str) -> ParsedEmail:
         result.all_headers = all_headers
 
         # ---- body ----
-        result.body_text = redact_sensitive_data(msg.body)
+        result.body_text = msg.body
         raw_html = msg.htmlBody.decode("utf-8", errors="ignore") if isinstance(msg.htmlBody, bytes) else msg.htmlBody
-        result.body_html = redact_sensitive_data(raw_html) if raw_html else None
+        result.body_html = raw_html if raw_html else None
 
         # ---- attachments ----
         attachments = []

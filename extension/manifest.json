@@ -1,28 +1,40 @@
 {
   "manifest_version": 3,
-  "name": "PhishGuard",
-  "version": "1.0.0",
-  "description": "Enterprise Email Security - AI Threat Detection",
+  "name": "PhishGuard Local",
+  "version": "2.0.0",
+  "description": "Local email checks with clear English and Hindi explanations.",
   "permissions": [
-    "activeTab",
-    "scripting"
+    "identity",
+    "storage"
   ],
   "host_permissions": [
-    "https://mail.google.com/*",
-    "https://threat-email-platform-1.onrender.com/*"
+    "https://gmail.googleapis.com/*",
+    "http://127.0.0.1:5000/*",
+    "https://oauth2.googleapis.com/*"
   ],
+  "oauth2": {
+    "client_id": "REPLACE_WITH_CHROME_OAUTH_CLIENT_ID.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/gmail.readonly"
+    ]
+  },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "local-background.js"
   },
   "content_scripts": [
     {
-      "matches": ["https://mail.google.com/*"],
-      "css": ["styles.css"],
-      "js": ["content.js"],
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "local-content.js"
+      ],
       "run_at": "document_idle"
     }
   ],
+  "options_page": "options.html",
   "action": {
-    "default_title": "PhishGuard is active"
+    "default_title": "PhishGuard settings",
+    "default_popup": "options.html"
   }
 }

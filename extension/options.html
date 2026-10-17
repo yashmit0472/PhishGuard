@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>PhishGuard settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main>
+      <h1>PhishGuard</h1>
+      <p id="status" role="status" aria-live="polite"></p>
+      <h2>1. Pair the local app</h2>
+      <p>
+        Start PhishGuard. Copy its 8-character local pairing code. Never share
+        that code.
+      </p>
+      <label for="code">Local pairing code</label
+      ><input id="code" maxlength="8" autocomplete="off" /><button id="pair">
+        Pair
+      </button>
+      <h2>2. Connect Gmail</h2>
+      <p>
+        Google grants read access to your mailbox. PhishGuard requests only the
+        message you open, including its headers, body and attachments. It sends
+        that message to the app on this computer for analysis.
+      </p>
+      <button id="connect">Connect Gmail</button
+      ><button id="signout">Sign out and delete local Google tokens</button>
+      <h2>Automatic checks</h2>
+      <label
+        ><input type="checkbox" id="automatic" checked /> Check emails
+        automatically when I open them</label
+      >
+      <p>
+        This reads each identifiable open message through Google, including
+        attachments. No mailbox-wide scan runs. Turn this off to use the “Check
+        this email” button instead.
+      </p>
+      <p>
+        Missing or ambiguous message IDs are not guessed. EML upload remains
+        available in the local app.
+      </p>
+      <a href="http://127.0.0.1:5000/" target="_blank" rel="noopener"
+        >Open local PhishGuard</a
+      >
+    </main>
+    <script src="options.js"></script>
+  </body>
+</html>
